@@ -1,0 +1,28 @@
+
+data_structure = [[1, 2, 3], {'a': 4, 'b': 5}, (6, {'cube': 7, 'drum': 8}), "Hello", ((), [{(2, 'Urban', ('Urban2', 35))}])]
+
+def amount_data(*args):
+    sum = 0
+    for var in args:
+        if isinstance(var, list):
+            for j in var:
+                sum += amount_data(j)
+        elif isinstance(var, dict):
+            for key, value in var.items():
+            	sum += amount_data(key, value)
+        elif isinstance(var, tuple):
+            for j in var:
+                sum += amount_data(j)
+        elif isinstance(var, set):
+            for j in var:
+                sum += amount_data(j)       
+        elif isinstance(var, str):
+            sum += len(var)
+        elif isinstance(var, int):
+            sum += var
+    return sum
+
+
+
+result = amount_data(data_structure)
+print(result)
